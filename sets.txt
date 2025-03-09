@@ -3,11 +3,13 @@
 Hippowdon  
 Ability: Sand Stream  
 Level: 50  
+- Earthquake  
 
 Cacturne  
 Ability: Sand Veil  
 Level: 50  
 IVs: 0 Atk  
+- Earthquake  
 
 Gliscor (M) @ Toxic Orb  
 Ability: Poison Heal  
