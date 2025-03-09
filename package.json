@@ -3,6 +3,7 @@
   "dependencies": {
     "@pkmn/data": "^0.9.31",
     "@pkmn/dex": "^0.9.31",
-    "@pkmn/sets": "^5.1.2"
+    "@pkmn/sets": "^5.1.2",
+    "canvas": "^3.1.0"
   }
 }
