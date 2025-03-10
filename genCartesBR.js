@@ -15,7 +15,7 @@ async function tradueixHabilitat(nom){
             res.on('end', () => {
                 let noms = JSON.parse(Buffer.concat(data)).names;
                 for (let transl of noms){
-                    if (transl.language.name === "es"){
+                    if (transl.language.name === idioma){
                         bufferHabs[nom] = transl.name;
                         resolve (transl.name);
                     }
@@ -42,7 +42,7 @@ async function tradueixAtac(nom){
             res.on('end', () => {
                 let noms = JSON.parse(Buffer.concat(data)).names;
                 for (let transl of noms){
-                    if (transl.language.name === "es"){
+                    if (transl.language.name === idioma){
                         bufferAtacs[nom] = transl.name;
                         resolve (transl.name);
                     }
@@ -105,6 +105,8 @@ function imatgeOutline(imatge, ctx, posx, posy){
 let bufferHabs = [], bufferAtacs = [], bufferImgs = [];
 
 const dirFons = "FichasBR", dirDest = "Resultat";
+
+const idioma = "es";
 
 const fitxers = fs.readdirSync(dirFons);
 
@@ -178,7 +180,6 @@ for (let [i, equipo] of equips.entries()){
         // Objecte
         let icona = await loadImage(traduccions[j*epm + 5]);
         ctx.globalCompositeOperation = "source-over";
-        //ctx.drawImage(icona, posicions[j*2] + midanom.width, posicions[j*2 + 1] + offsetObjecte);
         imatgeOutline(icona, ctx, posicions[j*2] + midanom.width, posicions[j*2 + 1] + offsetObjecte);
     }
 
@@ -187,7 +188,6 @@ for (let [i, equipo] of equips.entries()){
     if (i > fitxers.length) fitxer = fitxers[0];
     else fitxer = fitxers[i];
     loadImage(dirFons + "/" + fitxer).then((bg) => {
-    //loadImage(await obteObjecte("leftovers")).then((bg) => {
         ctx.globalCompositeOperation = "destination-over";
         ctx.drawImage(bg, 0, 0);
         let stream = canvas.createPNGStream();
