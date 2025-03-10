@@ -1,9 +1,7 @@
 import fs from 'fs';
-import {Dex} from '@pkmn/dex';
 import {Sets} from '@pkmn/sets';
 import {createCanvas, loadImage} from 'canvas';
 import * as https from 'node:https';
-
 
 // Configuració
 
@@ -192,7 +190,7 @@ function imatgeOutline(imatge, ctx, posx, posy){
         outlineObjete + dArr[i]*outlineObjete,
         outlineObjete + dArr[i+1]*outlineObjete
     );
-    
+
     // Omplim les 8 còpies de blanc.
     auxctx.globalCompositeOperation = "source-in";
     auxctx.fillStyle = "white";
@@ -340,7 +338,7 @@ for (let [i, equip] of equips.entries()){
             }
         }
 
-        // Fons
+        // Imatges
         
         // Un cop han acabat de carregar les (fins a) 5 imatges, seguim:
         Promise.all(promesesImg).then((imatges) => {
