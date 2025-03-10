@@ -23,9 +23,9 @@ const midaSpriteObjecte = {
     y: 30
 };
 const posicions = [
-    { x: 60,  y: 110 },
+    { x: 50,  y: 110 },
     { x: 420, y: 110 },
-    { x: 60,  y: 310 },
+    { x: 50,  y: 310 },
     { x: 420, y: 310 }
 ];
 const difPosMoviments = {
@@ -159,97 +159,99 @@ for (let [i, equipo] of equips.entries()){
         promesesTrads[j*epm + 5] = obteObjecte(sets[j].item);
     }
 
-    let traduccions = await Promise.all (promesesTrads);
+    //let traduccions = await Promise.all (promesesTrads);
 
-    for (let j = 0; j < 4 && j < mons.length - 1; ++j){
-        // Nom pokémon
-        ctx.globalCompositeOperation = "source-over";
-        ctx.font = fontMon;
-        ctx.fillStyle = 'black';
-        ctx.fillText(sets[j].species, posicions[j].x, posicions[j].y);
-        ctx.lineWidth = outlineMon;
-        ctx.strokeStyle = 'white';
-        
-        // Stroke
-        
-        //ctx.strokeText(sets[j].species, posicions[j].x, posicions[j].y);
+    Promise.all(promesesTrads).then((traduccions) => {
+        let midanom = [];
 
-        // Hem de dibuixar la vora paraula per paraula, o algunes fonts ficaran
-        // brossa on no volem
-        let sencer = ""
-        for (let paraula of sets[j].species.split(' ')){
-            ctx.strokeText(
-                paraula, 
-                posicions[j].x + ctx.measureText(sencer).width, 
-                posicions[j].y
-            );
-            sencer += " " + paraula;
+        let promesesImg = [];
+        let fitxer, nomEquip = mons[0].split("] ")[1].split(" =")[0];
+        if (i > fitxers.length) fitxer = fitxers[0];
+        else fitxer = fitxers[i];
+        promesesImg[4] = loadImage(dirFons + "/" + fitxer);
+
+        for (let j = 0; j < 4 && j < mons.length - 1; ++j){
+            promesesImg[j] = loadImage(traduccions[j*epm + 5]);
         }
 
-        let midanom = ctx.measureText(sets[j].species);
+        for (let j = 0; j < 4 && j < mons.length - 1; ++j){
+            // Nom pokémon
+            ctx.globalCompositeOperation = "source-over";
+            ctx.font = fontMon;
+            ctx.fillStyle = 'black';
+            ctx.fillText(sets[j].species, posicions[j].x, posicions[j].y);
+            ctx.lineWidth = outlineMon;
+            ctx.strokeStyle = 'white';
+            
+            // Stroke
 
-        // Atacs i Habilitat
-
-        ctx.font = fontAtq;
-        ctx.lineWidth = outlineAtacs;
-
-        let alcada = ctx.measureText("F").actualBoundingBoxAscent;
-
-        // Hem de dibuixar la vora paraula per paraula, o algunes fonts ficaran
-        // brossa on no volem
-        for (let k = 0; k < 5; ++k){
-            if (traduccions[j*epm + k] !== ''){
-                let texteReal;
-                if (k < 4) texteReal = "- " + traduccions[j*epm + k];
-                else texteReal = "Habilidad: " + traduccions[j*epm + k];
-                ctx.fillText(
-                    texteReal, 
-                    posicions[j].x + difPosMoviments.x, 
-                    posicions[j].y + difPosMoviments.y + k * (alcada + espaiatAtacs)
+            // Hem de dibuixar la vora paraula per paraula, o algunes fonts ficaran
+            // brossa on no volem
+            let sencer = "";
+            for (let paraula of sets[j].species.split(' ')){
+                ctx.strokeText(
+                    paraula, 
+                    posicions[j].x + ctx.measureText(sencer).width, 
+                    posicions[j].y
                 );
-                sencer = "";
-                for (let paraula of texteReal.split(' ')){
-                    ctx.strokeText(
-                        paraula, 
-                        posicions[j].x + difPosMoviments.x + ctx.measureText(sencer).width, 
-                        posicions[j].y + difPosMoviments.y + k * (alcada + espaiatAtacs
-                    ));
-                    sencer += " " + paraula;
+                sencer += " " + paraula;
+            }
+
+            midanom[j] = ctx.measureText(sets[j].species).width;
+
+            // Atacs i Habilitat
+
+            ctx.font = fontAtq;
+            ctx.lineWidth = outlineAtacs;
+
+            let alcada = ctx.measureText("F").actualBoundingBoxAscent;
+
+            // Hem de dibuixar la vora paraula per paraula, o algunes fonts ficaran
+            // brossa on no volem
+            for (let k = 0; k < 5; ++k){
+                if (traduccions[j*epm + k] !== ''){
+                    let texteReal;
+                    if (k < 4) texteReal = "- " + traduccions[j*epm + k];
+                    else texteReal = "Habilidad: " + traduccions[j*epm + k];
+                    ctx.fillText(
+                        texteReal, 
+                        posicions[j].x + difPosMoviments.x, 
+                        posicions[j].y + difPosMoviments.y + k * (alcada + espaiatAtacs)
+                    );
+                    sencer = "";
+                    for (let paraula of texteReal.split(' ')){
+                        ctx.strokeText(
+                            paraula, 
+                            posicions[j].x + difPosMoviments.x + ctx.measureText(sencer).width, 
+                            posicions[j].y + difPosMoviments.y + k * (alcada + espaiatAtacs
+                        ));
+                        sencer += " " + paraula;
+                    }
                 }
             }
         }
 
-        /*
-        let atacsHab = "";
-        for (let k = 0; k < 4; ++k){
-            if (traduccions[j*epm + k] !== '') atacsHab += "- " + traduccions[j*epm + k];
-            atacsHab += "\n";
-        }
-        atacsHab += "Habilidad: " + traduccions[j*epm + 4];
+        // Fons
+        
+        Promise.all(promesesImg).then((imatges) => {
 
-        ctx.font = 'bold 31px ' + font;
-        ctx.lineWidth = outlineAtacs;
-        ctx.fillText(atacsHab, posicions[j].x + difPosMoviments.x, posicions[j].y + difPosMoviments.y);
-        ctx.strokeText(atacsHab, posicions[j].x + difPosMoviments.x, posicions[j].y + difPosMoviments.y);
-        */
+            for (let j = 0; j < 4 && j < mons.length - 1; ++j){
+                if (imatges[j] !== undefined){
+                    ctx.globalCompositeOperation = "source-over";
+                    imatgeOutline(
+                        imatges[j], 
+                        ctx, 
+                        posicions[j].x + midanom[j], 
+                        posicions[j].y + offsetObjecte
+                    );
+                }
+            }
 
-        // Objecte
-        if (traduccions[j*epm + 5] !== undefined){ 
-            let icona = await loadImage(traduccions[j*epm + 5]);
-            ctx.globalCompositeOperation = "source-over";
-            imatgeOutline(icona, ctx, posicions[j].x + midanom.width, posicions[j].y + offsetObjecte);
-        }
-    }
-
-    // Fons
-    let fitxer, nomEquip = mons[0].split("] ")[1].split(" =")[0];
-    if (i > fitxers.length) fitxer = fitxers[0];
-    else fitxer = fitxers[i];
-    loadImage(dirFons + "/" + fitxer).then((bg) => {
-        ctx.globalCompositeOperation = "destination-over";
-        ctx.drawImage(bg, 0, 0);
-        let stream = canvas.createPNGStream();
-        let out = fs.createWriteStream(dirDest + '/' + nomEquip + '.png');
-        stream.pipe(out);
+            ctx.globalCompositeOperation = "destination-over";
+            ctx.drawImage(imatges[4], 0, 0);
+            let stream = canvas.createPNGStream();
+            let out = fs.createWriteStream(dirDest + '/' + nomEquip + '.png');
+            stream.pipe(out);
+        });
     });
 }
