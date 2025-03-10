@@ -163,14 +163,14 @@ async function obteObjecte(nom){
 function imatgeOutline(imatge, ctx, posx, posy){
     // Array amb les 8 direccions cardinals
     var dArr = [
-        -1,-1,
-         0,-1,
-         1,-1,
-        -1, 0,
-         1, 0,
-        -1, 1,
-         0, 1,
-         1, 1
+        { x: -1, y: -1 },
+        { x:  0, y: -1 },
+        { x:  1, y: -1 },
+        { x: -1, y:  0 },
+        { x:  1, y:  0 },
+        { x: -1, y:  1 },
+        { x:  0, y:  1 },
+        { x:  1, y:  1 }
     ];
 
     // Creem un nou canvas amb les mides de l'objecte.
@@ -185,10 +185,10 @@ function imatgeOutline(imatge, ctx, posx, posy){
     auxctx.scale(escalaObjecte, escalaObjecte);
 
     // Dibuixem la imatge 8 cops, desplaçada en les 8 direccions cardinals, a outlineObjete de distància.
-    for(let i = 0; i < dArr.length; i += 2) auxctx.drawImage(
+    for(let i in dArr) auxctx.drawImage(
         imatge,
-        outlineObjete + dArr[i]*outlineObjete,
-        outlineObjete + dArr[i+1]*outlineObjete
+        outlineObjete + dArr[i].x * outlineObjete,
+        outlineObjete + dArr[i].y * outlineObjete
     );
 
     // Omplim les 8 còpies de blanc.
