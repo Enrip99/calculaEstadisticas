@@ -4,6 +4,37 @@ import {Sets} from '@pkmn/sets';
 import {createCanvas, loadImage} from 'canvas';
 import * as https from 'node:https';
 
+let bufferHabs = [], bufferAtacs = [], bufferImgs = [];
+
+const idioma = "es";
+const fitxerSets = "sets.txt", dirFons = "FichasBR", dirDest = "Resultat";
+
+const fontMon = "bold 60px Power Clear";
+const fontAtq = "bold 32px Power Clear"
+const outlineMon = 2, outlineAtacs = 1.5, OutlineObjete = 1;
+
+const escalaObjecte = 2;
+const midaImatgeFons = {
+    x: 805,
+    y: 487
+};
+const midaSpriteObjecte = {
+    x: 30,
+    y: 30
+};
+const posicions = [
+    { x: 60,  y: 110 },
+    { x: 420, y: 110 },
+    { x: 60,  y: 310 },
+    { x: 420, y: 310 }
+];
+const difPosMoviments = {
+    x: 6,
+    y: 30
+};
+const offsetObjecte = -25 * escalaObjecte;
+const espaiatAtacs = 4;
+
 
 async function tradueixHabilitat(nom){
     return new Promise ((resolve, reject) => {
@@ -57,7 +88,7 @@ async function tradueixAtac(nom){
 
 async function obteObjecte(nom){
     return new Promise ((resolve, reject) => {
-        if (nom === undefined) nom = "leftovers"
+        if (nom === undefined) resolve(undefined);
         if (bufferImgs[nom] !== undefined) resolve (bufferImgs[nom]);
         let nomFormat = nom.toLowerCase().replace(/ /g, '-').replace(/'/g, '');
         https.get("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/" + nomFormat + ".png", res => {
@@ -78,12 +109,12 @@ async function obteObjecte(nom){
 function imatgeOutline(imatge, ctx, posx, posy){
     var dArr = [-1,-1, 0,-1, 1,-1, -1,0, 1,0, -1,1, 0,1, 1,1]; // offset array
 
-    let canvasaux = createCanvas((midaSpriteObjecte + OutlineObjete * 2) * escalaObjecte, (midaSpriteObjecte + OutlineObjete * 2) * escalaObjecte);
+    let canvasaux = createCanvas((midaSpriteObjecte.x + OutlineObjete * 2) * escalaObjecte, (midaSpriteObjecte.y + OutlineObjete * 2) * escalaObjecte);
     let auxctx = canvasaux.getContext('2d');
 
-    auxctx.imageSmoothingEnabled = false
+    auxctx.imageSmoothingEnabled = false;
 
-    auxctx.scale(escalaObjecte, escalaObjecte)
+    auxctx.scale(escalaObjecte, escalaObjecte);
 
     // draw images at offsets from the array scaled by s
     for(let i = 0; i < dArr.length; i += 2) auxctx.drawImage(imatge,
@@ -103,46 +134,17 @@ function imatgeOutline(imatge, ctx, posx, posy){
     ctx.drawImage(canvasaux, posx, posy);
 }
 
-
-let bufferHabs = [], bufferAtacs = [], bufferImgs = [];
-
-const dirFons = "FichasBR", dirDest = "Resultat";
-
-const idioma = "es";
-
-const font = "Power Clear";
-
-const fitxers = fs.readdirSync(dirFons);
-
-const equips = fs.readFileSync("sets.txt").toString().split("\n\n\n");
-
-const escalaObjecte = 2;
-
-const midaSpriteObjecte = 30;
-
-const posicions = [
-    60, 110,
-    420, 110,
-    60, 310,
-    420, 310
-];
-const difPosMoviments = [
-    6, 30
-];
-const offsetObjecte = -25 * escalaObjecte;
-
 const epm = 6; //Entrades Per Mon - 4 atacs + habilitat + objecte.
+const fitxers = fs.readdirSync(dirFons);
+const equips = fs.readFileSync(fitxerSets).toString().split("\n\n\n");
 
-const outlineMon = 2, outlineAtacs = 1.5, OutlineObjete = 1;
-
-const espaiatAtacs = 4;
 
 for (let [i, equipo] of equips.entries()){
 //for (let i = 0; i < equips.length; ++i){
     const mons = equipo.split("\n\n");
 
-    let canvas = createCanvas(805, 487);
-    let ctx = canvas.getContext('2d')
+    let canvas = createCanvas(midaImatgeFons.x, midaImatgeFons.y);
+    let ctx = canvas.getContext('2d');
 
     let promesesTrads = [];
     let sets = [];
@@ -162,15 +164,15 @@ for (let [i, equipo] of equips.entries()){
     for (let j = 0; j < 4 && j < mons.length - 1; ++j){
         // Nom pokémon
         ctx.globalCompositeOperation = "source-over";
-        ctx.font = 'bold 60px ' + font;
+        ctx.font = fontMon;
         ctx.fillStyle = 'black';
-        ctx.fillText(sets[j].species, posicions[j*2], posicions[j*2 + 1]);
+        ctx.fillText(sets[j].species, posicions[j].x, posicions[j].y);
         ctx.lineWidth = outlineMon;
         ctx.strokeStyle = 'white';
         
         // Stroke
         
-        //ctx.strokeText(sets[j].species, posicions[j*2], posicions[j*2 + 1]);
+        //ctx.strokeText(sets[j].species, posicions[j].x, posicions[j].y);
 
         // Hem de dibuixar la vora paraula per paraula, o algunes fonts ficaran
         // brossa on no volem
@@ -178,8 +180,8 @@ for (let [i, equipo] of equips.entries()){
         for (let paraula of sets[j].species.split(' ')){
             ctx.strokeText(
                 paraula, 
-                posicions[j*2] + ctx.measureText(sencer).width, 
-                posicions[j*2 + 1]
+                posicions[j].x + ctx.measureText(sencer).width, 
+                posicions[j].y
             );
             sencer += " " + paraula;
         }
@@ -188,7 +190,7 @@ for (let [i, equipo] of equips.entries()){
 
         // Atacs i Habilitat
 
-        ctx.font = 'bold 31px ' + font;
+        ctx.font = fontAtq;
         ctx.lineWidth = outlineAtacs;
 
         let alcada = ctx.measureText("F").actualBoundingBoxAscent;
@@ -199,20 +201,19 @@ for (let [i, equipo] of equips.entries()){
             if (traduccions[j*epm + k] !== ''){
                 let texteReal;
                 if (k < 4) texteReal = "- " + traduccions[j*epm + k];
-                else texteReal = "Habilidad: " + traduccions[j*epm + k]
+                else texteReal = "Habilidad: " + traduccions[j*epm + k];
                 ctx.fillText(
                     texteReal, 
-                    posicions[j*2] + difPosMoviments[0], 
-                    posicions[j*2 + 1] + difPosMoviments[1] + k * (alcada + espaiatAtacs)
+                    posicions[j].x + difPosMoviments.x, 
+                    posicions[j].y + difPosMoviments.y + k * (alcada + espaiatAtacs)
                 );
-                sencer = ""
+                sencer = "";
                 for (let paraula of texteReal.split(' ')){
                     ctx.strokeText(
                         paraula, 
-                        posicions[j*2] + difPosMoviments[0] + ctx.measureText(sencer).width, 
-                        posicions[j*2 + 1] + difPosMoviments[1] + k * (alcada + espaiatAtacs
-
-                        ));
+                        posicions[j].x + difPosMoviments.x + ctx.measureText(sencer).width, 
+                        posicions[j].y + difPosMoviments.y + k * (alcada + espaiatAtacs
+                    ));
                     sencer += " " + paraula;
                 }
             }
@@ -228,14 +229,16 @@ for (let [i, equipo] of equips.entries()){
 
         ctx.font = 'bold 31px ' + font;
         ctx.lineWidth = outlineAtacs;
-        ctx.fillText(atacsHab, posicions[j*2] + difPosMoviments[0], posicions[j*2 + 1] + difPosMoviments[1]);
-        ctx.strokeText(atacsHab, posicions[j*2] + difPosMoviments[0], posicions[j*2 + 1] + difPosMoviments[1]);
+        ctx.fillText(atacsHab, posicions[j].x + difPosMoviments.x, posicions[j].y + difPosMoviments.y);
+        ctx.strokeText(atacsHab, posicions[j].x + difPosMoviments.x, posicions[j].y + difPosMoviments.y);
         */
 
         // Objecte
-        let icona = await loadImage(traduccions[j*epm + 5]);
-        ctx.globalCompositeOperation = "source-over";
-        imatgeOutline(icona, ctx, posicions[j*2] + midanom.width, posicions[j*2 + 1] + offsetObjecte);
+        if (traduccions[j*epm + 5] !== undefined){ 
+            let icona = await loadImage(traduccions[j*epm + 5]);
+            ctx.globalCompositeOperation = "source-over";
+            imatgeOutline(icona, ctx, posicions[j].x + midanom.width, posicions[j].y + offsetObjecte);
+        }
     }
 
     // Fons
@@ -248,5 +251,5 @@ for (let [i, equipo] of equips.entries()){
         let stream = canvas.createPNGStream();
         let out = fs.createWriteStream(dirDest + '/' + nomEquip + '.png');
         stream.pipe(out);
-    })
+    });
 }
