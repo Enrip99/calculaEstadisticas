@@ -8,7 +8,7 @@ import * as https from 'node:https';
 async function tradueixHabilitat(nom){
     return new Promise ((resolve, reject) => {
         if (bufferHabs[nom] !== undefined) resolve (bufferHabs[nom]);
-        let nomFormat = nom.toLowerCase().replace(/ /g, '-');
+        let nomFormat = nom.toLowerCase().replace(/ /g, '-').replace(/[']/g, '');
         https.get("https://pokeapi.co/api/v2/ability/" + nomFormat, res => {
             let data = [];
             res.on('data', chunk => data.push(chunk));
@@ -75,23 +75,30 @@ async function obteObjecte(nom){
     });
 }
 
-function imatgeOutline(imatge, canvas, ctx, posx, posy){
+function imatgeOutline(imatge, ctx, posx, posy){
     var dArr = [-1,-1, 0,-1, 1,-1, -1,0, 1,0, -1,1, 0,1, 1,1]; // offset array
-    
+
+    let canvasaux = createCanvas((midaSpriteObjecte + OutlineObjete * 2) * escalaObjecte, (midaSpriteObjecte + OutlineObjete * 2) * escalaObjecte);
+    let auxctx = canvasaux.getContext('2d');
+
+    auxctx.scale(escalaObjecte, escalaObjecte)
 
     // draw images at offsets from the array scaled by s
-    for(let i = 0; i < dArr.length; i += 2) ctx.drawImage(imatge,
-        posx + dArr[i]*OutlineObjete,
-        posy + dArr[i+1]*OutlineObjete
+    for(let i = 0; i < dArr.length; i += 2) auxctx.drawImage(imatge,
+        OutlineObjete + dArr[i]*OutlineObjete,
+        OutlineObjete + dArr[i+1]*OutlineObjete
     );
     // fill with color
-    ctx.globalCompositeOperation = "source-in";
-    ctx.fillStyle = "white";
-    ctx.fillRect(0,0,canvas.width, canvas.height);
+    auxctx.globalCompositeOperation = "source-in";
+    auxctx.fillStyle = "white";
+    auxctx.fillRect(0,0,canvasaux.width, canvasaux.height);
 
     // draw original image in normal mode
-    ctx.globalCompositeOperation = "source-over";
-    ctx.drawImage(imatge, posx, posy);
+    auxctx.globalCompositeOperation = "source-over";
+    auxctx.drawImage(imatge, OutlineObjete, OutlineObjete);
+
+
+    ctx.drawImage(canvasaux, posx, posy);
 }
 
 
@@ -103,20 +110,24 @@ const fitxers = fs.readdirSync(dirFons);
 
 const equips = fs.readFileSync("sets.txt").toString().split("\n\n\n");
 
+const escalaObjecte = 1.5;
+
+const midaSpriteObjecte = 30;
+
 const posicions = [
-    76, 104,
-    426, 105,
-    76, 305,
+    76, 90,
+    426, 95,
+    76, 300,
     426, 305
 ];
 const difPosMoviments = [
     6, 30
 ];
-const offsetObjecte = -25;
+const offsetObjecte = -25 * escalaObjecte;
 
 const epm = 6; //Entrades Per Mon - 4 atacs + habilitat + objecte.
 
-const outlineMon = 2, outlineAtacs = 1, OutlineObjete = 1;
+const outlineMon = 2, outlineAtacs = 1.5, OutlineObjete = 2;
 
 for (let [i, equipo] of equips.entries()){
 //for (let i = 0; i < equips.length; ++i){
@@ -159,7 +170,7 @@ for (let [i, equipo] of equips.entries()){
         }
         atacsHab += "Habilidad: " + traduccions[j*epm + 4];
 
-        ctx.font = '29px roa_m_bold_loc21';
+        ctx.font = '34px roa_m_bold_loc21';
         ctx.lineWidth = outlineAtacs;
         ctx.fillText(atacsHab, posicions[j*2] + difPosMoviments[0], posicions[j*2 + 1] + difPosMoviments[1]);
         ctx.strokeText(atacsHab, posicions[j*2] + difPosMoviments[0], posicions[j*2 + 1] + difPosMoviments[1]);
@@ -167,10 +178,8 @@ for (let [i, equipo] of equips.entries()){
         // Objecte
         let icona = await loadImage(traduccions[j*epm + 5]);
         ctx.globalCompositeOperation = "source-over";
-        ctx.drawImage(icona, posicions[j*2] + midanom.width, posicions[j*2 + 1] + offsetObjecte);
-        //imatgeOutline(icona, canvas, ctx, posicions[j*2] + midanom.width, posicions[j*2 + 1] + offsetObjecte);
-        //https://stackoverflow.com/questions/24039599/how-to-add-stroke-outline-to-transparent-png-image-in-javascript-canvas
-        
+        //ctx.drawImage(icona, posicions[j*2] + midanom.width, posicions[j*2 + 1] + offsetObjecte);
+        imatgeOutline(icona, ctx, posicions[j*2] + midanom.width, posicions[j*2 + 1] + offsetObjecte);
     }
 
     // Fons
