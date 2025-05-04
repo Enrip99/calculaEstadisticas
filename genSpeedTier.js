@@ -15,6 +15,7 @@ let equips = fs.readFileSync("sets.txt").toString().split("\n\n\n");
 for (let equip of equips){
     let nomEquip;
     let mons = equip.split("\n\n");
+    let tailwind = equip.includes("Tailwind");
     for (let mon in mons){
         if (mon == 0){
             nomEquip = mons[mon].split("] ")[1].split(" =")[0];
@@ -33,6 +34,13 @@ for (let equip of equips){
                 llistat.push({
                     velocitat: 2 * gen.stats.calc('spe', gen.species.get(set.species).baseStats.spe, ivs, evs, set.level, gen.natures.get(set.nature)),
                     nom: set.species + " (" + set.ability + ")",
+                    equip: nomEquip,
+                })
+            }
+            if (tailwind){
+                llistat.push({
+                    velocitat: 2 * gen.stats.calc('spe', gen.species.get(set.species).baseStats.spe, ivs, evs, set.level, gen.natures.get(set.nature)),
+                    nom: set.species + " (Tailwind)",
                     equip: nomEquip,
                 })
             }
