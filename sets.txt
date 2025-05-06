@@ -1,14 +1,150 @@
-=== [gen4vgc2010] Untitled 16 ===
+=== [gen4vgc2010] Untitled 24 ===
 
-Hippowdon  
+Scizor (M) @ Occa Berry  
+Ability: Swarm  
+Level: 50  
+EVs: 252 HP / 252 Atk / 4 SpD  
+Adamant Nature  
+- Bullet Punch  
+- Superpower  
+- Bug Bite  
+- Roost  
+
+Magnezone @ Shuca Berry  
+Ability: Magnet Pull  
+Level: 50  
+EVs: 252 HP / 248 SpA / 4 SpD / 4 Spe  
+Modest Nature  
+IVs: 2 Atk / 30 SpA  
+- Thunder  
+- Hidden Power [Grass]  
+- Thunder Wave  
+- Rain Dance  
+
+Toxicroak (M) @ Life Orb  
+Ability: Dry Skin  
+Level: 50  
+EVs: 252 Atk / 4 SpD / 252 Spe  
+Jolly Nature  
+- Cross Chop  
+- Poison Jab  
+- Fake Out  
+- Rain Dance  
+
+Manaphy @ Damp Rock  
+Ability: Hydration  
+Level: 50  
+EVs: 252 HP / 120 Def / 96 SpA / 24 SpD / 16 Spe  
+Calm Nature  
+IVs: 3 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe  
+- Surf  
+- Hidden Power [Fighting]  
+- Ice Beam  
+- Rain Dance  
+
+
+=== [gen4vgc2010] Untitled 23 ===
+
+Altaria (F) @ Yache Berry  
+Ability: Natural Cure  
+Level: 50  
+Shiny: Yes  
+EVs: 252 Atk / 4 SpA / 252 Spe  
+Hasty Nature  
+- Draco Meteor  
+- Outrage  
+- Body Slam  
+- Power Swap  
+
+Nidoking @ Life Orb  
+Ability: Rivalry  
+Level: 50  
+EVs: 252 SpA / 4 SpD / 252 Spe  
+Timid Nature  
+IVs: 0 Atk  
+- Earth Power  
+- Ice Beam  
+- Thunderbolt  
+- Taunt  
+
+Mismagius (F) @ Colbur Berry  
+Ability: Levitate  
+Level: 50  
+EVs: 100 HP / 4 Def / 244 SpA / 4 SpD / 156 Spe  
+Timid Nature  
+IVs: 0 Atk  
+- Shadow Ball  
+- Icy Wind  
+- Taunt  
+- Calm Mind  
+
+Azelf @ Silk Scarf  
+Ability: Levitate  
+Level: 50  
+EVs: 4 HP / 248 Atk / 4 SpD / 252 Spe  
+Lonely Nature  
+IVs: 30 Spe  
+- Explosion  
+- Psychic  
+- Thunderbolt  
+- Hidden Power [Ice]  
+
+
+=== [gen4vgc2010] Untitled 22 ===
+
+Staraptor (M) @ Sharp Beak  
+Ability: Reckless  
+Level: 50  
+EVs: 4 HP / 252 Atk / 252 Spe  
+Jolly Nature  
+- Brave Bird  
+- Close Combat  
+- Quick Attack  
+- Roost  
+
+Dodrio (M) @ Chesto Berry  
+Ability: Tangled Feet  
+Level: 50  
+EVs: 252 Atk / 4 SpD / 252 Spe  
+Jolly Nature  
+- Brave Bird  
+- Double-Edge  
+- Sleep Talk  
+- Rest  
+
+Swellow (M) @ Flame Orb  
+Ability: Guts  
+Level: 50  
+EVs: 252 Atk / 4 SpD / 252 Spe  
+Jolly Nature  
+- Facade  
+- Brave Bird  
+- U-turn  
+- Tailwind  
+
+Rhyperior (M) @ Leftovers  
+Ability: Lightning Rod  
+Level: 50  
+EVs: 252 HP / 172 Atk / 4 Def / 4 SpD / 76 Spe  
+Adamant Nature  
+- Earthquake  
+- Hammer Arm  
+- Crunch  
+- Toxic  
+
+
+=== [gen4vgc2010] Sorra ===
+
+Hippowdon (F) @ Passho Berry  
 Ability: Sand Stream  
 Level: 50  
+EVs: 252 HP / 252 Atk / 4 Def  
+Brave Nature  
+IVs: 0 Spe  
 - Earthquake  
-
-Cacturne  
-Ability: Sand Veil  
-Level: 50  
-- Seed Bomb  
+- Ice Fang  
+- Crunch  
+- Protect  
 
 Gliscor (M) @ Toxic Orb  
 Ability: Poison Heal  
@@ -20,11 +156,26 @@ Jolly Nature
 - Toxic  
 - Spikes  
 
-Skarmory  
+Skarmory (M) @ Leftovers  
 Ability: Keen Eye  
 Level: 50  
-IVs: 0 Atk  
+EVs: 252 HP / 252 Def / 4 Spe  
+Impish Nature  
+- Drill Peck  
+- Steel Wing  
 - Tailwind  
+- Sandstorm  
+
+Alakazam (M) @ Flame Orb  
+Ability: Magic Guard  
+Level: 50  
+EVs: 252 SpA / 4 SpD / 252 Spe  
+Timid Nature  
+IVs: 0 Atk  
+- Psychic  
+- Shadow Ball  
+- Trick  
+- Psycho Shift  
 
 
 === [gen4vgc2010] Perish Trap ===
@@ -189,7 +340,7 @@ IVs: 0 Atk
 Darkrai @ Leftovers  
 Ability: Bad Dreams  
 Level: 50  
-EVs: 252 HP / 4 SpA / 252 Spe  
+EVs: 252 HP / 52 Def / 4 SpA / 60 SpD / 140 Spe  
 Timid Nature  
 IVs: 0 Atk  
 - Dream Eater  
@@ -213,7 +364,7 @@ Adamant Nature
 Chansey @ Lucky Punch  
 Ability: Natural Cure  
 Level: 50  
-EVs: 252 HP / 4 Def / 252 SpD  
+EVs: 252 HP / 252 SpD  
 Calm Nature  
 IVs: 0 Atk / 0 SpA  
 - Double Slap  
@@ -226,7 +377,6 @@ Ability: Anger Point
 Level: 50  
 EVs: 124 Atk / 252 Def / 132 SpA  
 Relaxed Nature  
-IVs: 0 Spe  
 - Overheat  
 - Flare Blitz  
 - Earthquake  
@@ -560,7 +710,7 @@ IVs: 0 Atk
 - Ice Beam  
 - Thunder Wave  
 
-Gyarados (M) @ Charti Berry  
+Gyarados Rojo (Gyarados) (M) @ Charti Berry  
 Ability: Intimidate  
 Level: 50  
 Shiny: Yes  
@@ -618,50 +768,47 @@ IVs: 0 Atk
 - Substitute  
 
 
-=== [gen4vgc2010] xd ===
+=== [gen4vgc2010] Sun Team ===
 
-Lopunny (F) @ Choice Scarf  
-Ability: Klutz  
+Ninetales (M) @ White Herb  
+Ability: Drought  
 Level: 50  
-Shiny: Yes  
-EVs: 4 HP / 252 Atk / 252 Spe  
-Jolly Nature  
-- Return  
-- Drain Punch  
-- Switcheroo  
-- Encore  
+EVs: 244 HP / 252 SpA / 8 SpD  
+Modest Nature  
+IVs: 3 Atk / 30 Def / 30 SpD / 30 Spe  
+- Overheat  
+- Hidden Power [Rock]  
+- Pain Split  
+- Will-O-Wisp  
 
-Wigglytuff (F) @ Light Clay  
-Ability: Cute Charm  
+Venusaur (M) @ Occa Berry  
+Ability: Chlorophyll  
 Level: 50  
-Shiny: Yes  
-EVs: 252 HP / 4 Def / 252 SpD  
-Calm Nature  
-IVs: 0 Atk  
-- Seismic Toss  
-- Light Screen  
-- Attract  
-- Wish  
-
-Gardevoir (F) @ Leftovers  
-Ability: Trace  
-Level: 50  
-Shiny: Yes  
-EVs: 132 HP / 124 SpA / 252 SpD  
+EVs: 252 SpA / 4 SpD / 252 Spe  
 Modest Nature  
 IVs: 0 Atk  
-- Psychic  
-- Shadow Ball  
-- Calm Mind  
-- Pain Split  
+- Solar Beam  
+- Sludge Bomb  
+- Synthesis  
+- Sleep Powder  
 
-Mawile (F) @ Life Orb  
-Ability: Huge Power  
+Tangrowth (M) @ Sitrus Berry  
+Ability: Leaf Guard  
 Level: 50  
-Shiny: Yes  
-EVs: 252 HP / 108 Atk / 148 Def  
-Impish Nature  
-- Iron Head  
-- Sucker Punch  
-- Protect  
-- Iron Defense  
+EVs: 252 HP / 252 Atk / 4 SpD  
+Adamant Nature  
+- Power Whip  
+- Earthquake  
+- Stun Spore  
+- Morning Sun  
+
+Charizard (M) @ Life Orb  
+Ability: Solar Power  
+Level: 50  
+EVs: 252 SpA / 8 SpD / 248 Spe  
+Timid Nature  
+IVs: 3 Atk / 30 Def / 30 SpD / 30 Spe  
+- Flamethrower  
+- Air Slash  
+- Hidden Power [Rock]  
+- Roost  
