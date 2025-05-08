@@ -2,11 +2,13 @@ import fs from 'fs';
 import {Sets} from '@pkmn/sets';
 import {createCanvas, loadImage} from 'canvas';
 import * as https from 'node:https';
+import fetch from "node-fetch"
 
 // Configuració
 
 // Idioma al que traduir.
 const idioma = "es";
+const settings = { method: "Get" };
 
 // Camins a...
 // (serveix tant camí relatiu com camí absolut)
@@ -69,12 +71,11 @@ async function tradueixHabilitat(nom){
         let nomFormat = nom.toLowerCase().replace(/ /g, '-').replace(/[^a-z0-9-]/g, '');
 
         // Fem la petició HTTPS.
-        https.get("https://pokeapi.co/api/v2/ability/" + nomFormat, res => {
-            let data = [];
-            res.on('data', chunk => data.push(chunk));
-            res.on('end', () => {
-                let noms = JSON.parse(Buffer.concat(data)).names;
 
+        fetch("https://pokeapi.co/api/v2/ability/" + nomFormat, settings)
+            .then(res => res.json())
+            .then((json) => {
+                let noms = json.names;
                 // Un cop tenim el JSON tractat, cerquem el camp que té el nom en el nostre idioma.
                 for (let transl of noms){
                     if (transl.language.name === idioma){
@@ -83,10 +84,6 @@ async function tradueixHabilitat(nom){
                     }
                 }
             });
-        }).on('error', err => {
-            console.error(err.message);
-            reject(err.message);
-        });
     });
 }
 
@@ -109,24 +106,18 @@ async function tradueixAtac(nom){
         }
 
         // Fem la petició HTTPS.
-        https.get("https://pokeapi.co/api/v2/move/" + nomFormat, res => {
-            let data = [];
-            res.on('data', chunk => data.push(chunk));
-            res.on('end', () => {
-                let noms = JSON.parse(Buffer.concat(data)).names;
-
+        fetch("https://pokeapi.co/api/v2/move/" + nomFormat, settings)
+            .then(res => res.json())
+            .then((json) => {
+                let noms = json.names;
                 // Un cop tenim el JSON tractat, cerquem el camp que té el nom en el nostre idioma.
                 for (let transl of noms){
                     if (transl.language.name === idioma){
-                        bufferAtacs[nom] = transl.name;
+                        bufferHabs[nom] = transl.name;
                         resolve (transl.name);
                     }
                 }
             });
-        }).on('error', err => {
-            console.error(err.message);
-            reject(err.message);
-        });
     });
 }
 

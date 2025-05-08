@@ -1,7 +1,7 @@
-=== [gen4vgc2010] Untitled 24 ===
+=== [gen4vgc2010] Rain 3 ===
 
 Scizor (M) @ Occa Berry  
-Ability: Swarm  
+Ability: Technician  
 Level: 50  
 EVs: 252 HP / 252 Atk / 4 SpD  
 Adamant Nature  
@@ -34,7 +34,6 @@ Jolly Nature
 Manaphy @ Damp Rock  
 Ability: Hydration  
 Level: 50  
-EVs: 252 HP / 120 Def / 96 SpA / 24 SpD / 16 Spe  
 Calm Nature  
 IVs: 3 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe  
 - Surf  
@@ -43,7 +42,7 @@ IVs: 3 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 - Rain Dance  
 
 
-=== [gen4vgc2010] Untitled 23 ===
+=== [gen4vgc2010] QW spam ===
 
 Altaria (F) @ Yache Berry  
 Ability: Natural Cure  
@@ -90,7 +89,7 @@ IVs: 30 Spe
 - Hidden Power [Ice]  
 
 
-=== [gen4vgc2010] Untitled 22 ===
+=== [gen4vgc2010] Ornitoleg ===
 
 Staraptor (M) @ Sharp Beak  
 Ability: Reckless  
@@ -140,7 +139,6 @@ Ability: Sand Stream
 Level: 50  
 EVs: 252 HP / 252 Atk / 4 Def  
 Brave Nature  
-IVs: 0 Spe  
 - Earthquake  
 - Ice Fang  
 - Crunch  
@@ -191,7 +189,7 @@ IVs: 0 Atk
 - Encore  
 - Destiny Bond  
 
-Wigglytuff (M) @ Light Clay  
+Wigglytuff (F) @ Light Clay  
 Ability: Cute Charm  
 Level: 50  
 EVs: 252 HP / 4 Def / 252 SpD  
